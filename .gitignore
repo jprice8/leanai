@@ -27,7 +27,7 @@ media
 # Python # 
 *.py[cod] 
 *$py.class 
-secrets.py
+sec_vars.py
 
 # Distribution / packaging 
 .Python build/ 
