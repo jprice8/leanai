@@ -1,0 +1,33 @@
+{% extends 'inventory/base.html' %}
+
+{% block content %}
+  <h1>My Items</h1>
+{% if item_list %}
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Description</th>
+        <th scope="col">Manufacturer</th>
+        <th scope="col">Inventory</th>
+        <th scope="col">Cost</th>
+        <th scope="col">Net Cost</th>
+        <th scope="col">Created</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in item_list %}
+        <tr>
+          <td>{{ item.description }}</td>
+          <td>{{ item.mfr }}</td>
+          <td>{{ item.inventory_qty }}</td>
+          <td>{{ item.cost }}</td>
+          <td>{{ item.calculate_ext_cost }}</td>
+          <td>{{ item.created_at }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+    <h2>No Items Yet!</h2>
+{% endif %}
+{% endblock content %}

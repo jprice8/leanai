@@ -9,15 +9,39 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>LeanAI</title>
   </head>
   <body>
-    <header>
-      <p>header</p>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="{% url 'index' %}">LeanAI</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{% url 'item-list' %}">Home</a>
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="#">Login</a>
+              <a class="nav-item nav-link" href="#">Register</a>
+            </div>
+          </div>
+        </div>
+      </nav>
     </header>
-    <main>
+    <main role="main" class="container">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
           {% block content %}{% endblock %}
         </div>
       </div>

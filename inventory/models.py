@@ -14,7 +14,7 @@ class Item(models.Model):
         return f'{self.description} created by {self.owner} on {self.created_at}'
 
     def calculate_ext_cost(self):
-        return self.inventory*self.cost
+        return self.inventory_qty*self.cost
 
 
 class Order(models.Model):
