@@ -1,0 +1,7 @@
+{% extends 'inventory/base2.html' %}
+
+{% block content %}
+    <h1 class="mt-4">{{ item.description }}</h1>
+    <small class="text-muted">Added: {{ item.created_at }}</small>
+    <h3 class="text-info pt-4">Current Inventory: {{ item.inventory_qty }}</h3>
+{% endblock content %}

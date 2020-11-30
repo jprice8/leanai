@@ -1,0 +1,29 @@
+{% extends 'inventory/base2.html' %}
+
+{% block content %}
+    {% if orders %}
+        <table class="table table-hover mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Order Description</th>
+                    <th scope="col">Order Quantity</th>
+                    <th scope="col">Order Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.item.description }}</td>
+                        <td>{{ order.order_qty }}</td>
+                        <td>{{ order.created_at }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h3 class="m-5">No orders yet!</h3>
+    {% endif %}
+    <a class="btn btn-primary" href="{% url 'item-order-form' item.id %}">Place Order</a>
+{% endblock content %}

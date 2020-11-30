@@ -1,0 +1,29 @@
+{% extends 'inventory/base2.html' %}
+
+{% block content %}
+    {% if usage %}
+        <table class="table table-hover mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Order Description</th>
+                    <th scope="col">Order Quantity</th>
+                    <th scope="col">Order Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for use in usage %}
+                    <tr>
+                        <td>{{ use.id }}</td>
+                        <td>{{ use.item.description }}</td>
+                        <td>{{ use.usage_qty }}</td>
+                        <td>{{ use.created_at }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h3 class="m-5">No Usage yet!</h3>
+    {% endif %}
+    <a class="btn btn-primary" href="{% url 'item-usage-form' item.id %}">Use Item</a>
+{% endblock content %}

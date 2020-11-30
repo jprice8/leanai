@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Item(models.Model):
@@ -10,11 +11,17 @@ class Item(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ('-created_at', )
+
     def __str__(self):
         return f'{self.description} created by {self.owner} on {self.created_at}'
 
+    def get_absolute_url(self):
+        return reverse('item-detail', kwargs={'pk': self.pk})
+
     def calculate_ext_cost(self):
-        return self.inventory_qty*self.cost
+        return self.inventory_qty*self.cost 
 
 
 class Order(models.Model):

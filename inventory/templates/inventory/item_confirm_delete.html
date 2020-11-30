@@ -1,0 +1,9 @@
+{% extends 'inventory/base.html' %}
+{% block content %}
+    <h1 class="mt-4">Are you sure you want to delete this item?</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input class="btn btn-danger mt-4" type="submit" value="Confirm">
+    </form>
+{% endblock %}
