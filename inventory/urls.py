@@ -19,4 +19,7 @@ urlpatterns = [
     # usage urls
     path('item/<int:pk>/usage/', views.item_usage, name='item-usage'),
     path('item/<int:pk>/usage/form/', views.use_item, name='item-usage-form'),
+
+    # api urls
+    path('api/<int:pk>/orders/', views.GetOrdersForItem.as_view(), name='api-orders'),
 ]

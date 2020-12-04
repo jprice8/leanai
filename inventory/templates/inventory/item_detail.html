@@ -1,7 +1,102 @@
 {% extends 'inventory/base2.html' %}
 
+{% block javascript %}
+    <script>
+        var orders_endpoint = "{% url 'api-orders' item.id %}"
+
+        var defaultData = [];
+        var labels = [];
+
+        jQuery.ajax({
+            method: "GET",
+            url: orders_endpoint,
+            success: function(response_data){
+                labels = response_data.labels;
+                defaultData = response_data.default;
+                dynamic_orders = response_data.orders;
+
+                console.log("labels");
+                console.log(labels);
+                console.log("data");
+                console.log(defaultData);
+                console.log("orders");
+                console.log(dynamic_orders);
+
+                let js_order_qty = dynamic_orders.map(function(input) {
+                    return input.order_qty
+                });
+                console.log(js_order_qty);
+
+                let js_order_date = dynamic_orders.map(function(input) {
+                    return input.created_at
+                });
+                console.log(js_order_date)
+
+
+                var ctx = document.getElementById('thicc-chart');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: js_order_date,
+                        datasets: [{
+                            label: '# of orders',
+                            data: js_order_qty,
+                        }]
+                    }
+                });
+            },
+            error: function(error_data){
+                console.log(error_data);
+            }
+        });
+
+        // var ctx = document.getElementById('thicc-chart');
+        // var myChart = new Chart(ctx, {
+        //     type: 'line',
+        //     data: {
+        //         labels: labels,
+        //         datasets: [{
+        //             label: '# of votes',
+        //             data: defaultData,
+        //             backgroundColor: [
+        //                 'rgba(255, 99, 132, 0.2)',
+        //                 'rgba(54, 162, 235, 0.2)',
+        //                 'rgba(255, 206, 86, 0.2)',
+        //                 'rgba(75, 192, 192, 0.2)',
+        //                 'rgba(153, 102, 255, 0.2)',
+        //                 'rgba(255, 159, 64, 0.2)'
+        //             ],
+        //             borderColor: [
+        //                 'rgba(255, 99, 132, 1)',
+        //                 'rgba(54, 162, 235, 1)',
+        //                 'rgba(255, 206, 86, 1)',
+        //                 'rgba(75, 192, 192, 1)',
+        //                 'rgba(153, 102, 255, 1)',
+        //                 'rgba(255, 159, 64, 1)'
+        //             ],
+        //             borderWidth: 1
+        //         }]
+        //     },
+        //     options: {
+        //         scales: {
+        //             yAxes: [{
+        //                 ticks: {
+        //                     beginAtZero: true
+        //                 }
+        //             }]
+        //         }
+        //     }
+        // });
+    </script>
+{% endblock %}
+
 {% block content %}
     <h1 class="mt-4">{{ item.description }}</h1>
     <small class="text-muted">Added: {{ item.created_at }}</small>
     <h3 class="text-info pt-4">Current Inventory: {{ item.inventory_qty }}</h3>
+
+    <div id="container" style="width: 90%;">
+        <canvas id="thicc-chart"></canvas>
+    </div>
+
 {% endblock content %}
