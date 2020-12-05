@@ -49,8 +49,8 @@
           {% block content %}{% endblock %}
         </div>
         <div class="col-md-4">
-          <h5 class="mt-4">Navigation</h5>
-            <ul class="list-group">
+          <h5 class="text-center mt-4">Navigation</h5>
+            <ul class="shadow list-group">
                 <li class="list-group-item list-group-item-light"><a href="{% url 'item-detail' item.id %}">Item Detail</a></li>
                 <li class="list-group-item list-group-item-light"><a href="{% url 'item-orders' item.id %}">Item Orders</a></li>
                 <li class="list-group-item list-group-item-light"><a href="{% url 'item-usage' item.id %}">Item Usage</a></li> 
