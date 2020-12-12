@@ -1,82 +1,6 @@
 {% extends 'inventory/base2.html' %}
 
-{% block javascript %}
-    <script>
-        var orders_endpoint = "{% url 'api-orders' item.id %}"
-
-        var defaultData = [];
-        var labels = [];
-
-        jQuery.ajax({
-            method: "GET",
-            url: orders_endpoint,
-            success: function(response_data){
-                labels = response_data.labels;
-                defaultData = response_data.default;
-                dynamic_orders = response_data.orders;
-
-                console.log("labels");
-                console.log(labels);
-                console.log("data");
-                console.log(defaultData);
-                console.log("orders");
-                console.log(dynamic_orders);
-
-                // taking in orders qty and manipulating it
-                let js_order_qty = dynamic_orders.map(function(input) {
-                    return input.order_qty
-                });
-
-                // taking in orders date and manipulating it
-                let js_order_date = dynamic_orders.map(function(input) {
-                    let varDate = new Date(input.created_at)
-                    return varDate
-                });
-
-                const groups = dynamic_orders.reduce((groups, iorder) => {
-                    const date = iorder.created_at.split('T')[0];
-                    if (!groups[date]) {
-                        groups[date] = [];
-                    }
-                    groups[date].push(iorder.order_qty);
-                    groups[date].reduce(function(a, b){
-                        return a + b;
-                    });
-                    return groups;
-                }, {});
-
-                daily_orders_list = [];
-
-                Object.values(groups).map(num => {
-                    let n1 = num.reduce((total, num) => {
-                        return total + num;
-                    });
-                    daily_orders_list.push(n1);
-                });
-
-                
-                var ctx = document.getElementById('order-chart');
-                var myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: Object.keys(groups),
-                        datasets: [{
-                            label: 'orders minus usage',
-                            data: daily_orders_list,
-                        }]
-                    }
-                });
-            },
-            error: function(error_data){
-                console.log("ERROR GUY")
-                console.log(error_data);
-            }
-        });
-
-    </script>
-{% endblock %}
-
-{% block content %}
+{% block content %} 
 
     <!-- Leading Description -->
     <h1 class="mt-4">{{ item.description }}</h1>
@@ -85,7 +9,7 @@
     <!-- Item Info Dash -->
     <div class="container-fluid">
 
-        <div class="d-flex justify-content-around row">
+        <div class="d-flex justify-content-around row mt-4">
 
             <div class="shadow col-sm-3 card">
                 <div class="row">
@@ -111,18 +35,12 @@
                     <h3 class="card-title pl-4 pt-4">Net Cost</h3>
                 </div>
                 <div class="row">
-                    <h3 class="card-body text-center pt-4">${{ item.calculate_ext_cost }}</h3>
+                    <h3 class="card-body text-center pt-4">${{ item.calculate_ext_cost|floatformat:2 }}</h3>
                 </div>
             </div>
 
         </div>
 
-    </div>
-
-    <!-- Order Chart -->
-    <div class="mt-4" id="container" style="width: 100%;">
-        <h4>Net Movement</h4>
-        <canvas id="order-chart"></canvas>
     </div>
 
 {% endblock content %}
