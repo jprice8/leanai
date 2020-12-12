@@ -22,4 +22,5 @@ urlpatterns = [
 
     # api urls
     path('api/<int:pk>/orders/', views.GetOrdersForItem.as_view(), name='api-orders'),
+    path('api/<int:pk>/usage/', views.GetUsageForItem.as_view(), name='api-usage'),
 ]

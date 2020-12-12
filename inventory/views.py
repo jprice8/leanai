@@ -218,3 +218,28 @@ class GetOrdersForItem(APIView):
         }
 
         return Response(drf_data)
+
+
+
+class GetUsageForItem(APIView):
+    """
+    Retrieve, update, or delete usage instance.
+    """
+
+    def get_object(self, pk):
+        try:
+            item_from_id = get_object_or_404(Item, pk=pk)
+            usage = Usage.objects.filter(item=item_from_id)
+            return usage
+        except Usage.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        usage = self.get_object(pk)
+        serializer = UsageSerializer(usage, many=True)
+
+        drf_data = {
+            "usage": serializer.data,
+        }
+
+        return Response(drf_data)
