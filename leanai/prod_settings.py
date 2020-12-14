@@ -27,9 +27,17 @@ INVENTORY_TEMPLATE_DIR = os.path.join(BASE_DIR, "inventory", "templates")
 SECRET_KEY = sec_vars.SECRET_KEY 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.1.200', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = [
+        '167.71.16.40', 
+        'theleanai.net',
+        '*.theleanai.net',
+        'www.theleanai.net',
+        '192.168.1.200', 
+        '127.0.0.1',
+        'localhost'
+        ]
 
 
 # Application definition
