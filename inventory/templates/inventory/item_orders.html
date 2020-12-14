@@ -78,7 +78,6 @@
 
 
 {% block content %}
-    {% if orders %}
         <!-- Order Chart -->
         <div class="mt-4" id="container" style="width: 100%;">
             <h4>{{ item.description }} Order History</h4>
@@ -86,6 +85,8 @@
         </div>
 
         <a class="shadow btn btn-primary mt-3" href="{% url 'item-order-form' item.id %}">Place Order</a>
+
+    {% if orders %}
         <!-- Orde Log -->
         <table class="table table-hover mt-3">
             <thead>

@@ -68,15 +68,15 @@
 {% endblock %}
 
 {% block content %}
-    {% if usage %}
-        <!-- Order Chart -->
+        <!-- Usage Chart -->
         <div class="mt-4" id="container" style="width: 100%;">
             <h4>{{ item.description }} Usage History</h4>
             <canvas id="usage-chart"></canvas>
         </div>
 
         <a class="shadow btn btn-primary mt-3" href="{% url 'item-usage-form' item.id %}">Use Item</a>
-        <!-- Usage Chart -->
+    {% if usage %}
+        <!-- Usage Table -->
         <table class="table table-hover mt-3">
             <thead>
                 <tr>
