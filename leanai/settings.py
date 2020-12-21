@@ -130,6 +130,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+# On deployment, set STATIC_ROOT variable to where you will serve files 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "inventory", "static")
+]
 
 LOGIN_REDIRECT_URL = 'item-list'
 LOGIN_URL = 'login'

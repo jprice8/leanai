@@ -1,4 +1,73 @@
 {% extends 'inventory/base.html' %}
+
+{% load static %}
+
 {% block content %}
-    <h1 class="mt-5">Welcome to LeanAI</h1>
+
+    <!-- Call to Action Section -->
+    <section id="home" class="d-flex align-items-center position-relative vh-100 cover 
+    hero" 
+    style="background: white url('static/inventory/images/alaska_plane_2000_1000.jpg')
+    no-repeat;">
+        <div class="container-fluid container-fluid-max">
+            <div class="row">
+                <div class="col-12 col-sm-7 col-md-6 col-lg-5 col-xl-4">
+                    <h1 class="text-white">See what's possible with LeanAI!</h1>
+                    <div class="mt-3">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="process" class="process">
+        <div class="container-fluid container-fluid-max">
+            <div class="row text-center py-5">
+                <div class="col-12 pb-4">
+                    <h2>How It Works</h2>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <span class="fa-stack fa-2x">
+                        <i class="fas fa-circle fa-stack-2x text-landing"></i>
+                        <i class="fas fa-shopping-cart fa-stack-1x text-white"></i>
+                    </span>
+                    <h3 class="mt-3 text-landing h4">Order Items</h3>
+                    <p>Continue shopping at your favorite stores ordering your routine items.</p>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <span class="fa-stack fa-2x">
+                        <i class="fas fa-circle fa-stack-2x text-landing"></i>
+                        <i class="fas fa-pen fa-stack-1x text-white"></i>
+                    </span>
+                    <h3 class="mt-3 text-landing h4">Record Items</h3>
+                    <p>Record items in the web app after purchasing them.</p>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <span class="fa-stack fa-2x">
+                        <i class="fas fa-circle fa-stack-2x text-landing"></i>
+                        <i class="fas fa-brain fa-stack-1x text-white"></i>
+                    </span>
+                    <h3 class="mt-3 text-landing h4">Gain Insights</h3>
+                    <p>Our system will make predictions and recommendations in order for you to optimize your shopping.</p>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <span class="fa-stack fa-2x">
+                        <i class="fas fa-circle fa-stack-2x text-landing"></i>
+                        <i class="fas fa-dollar-sign fa-stack-1x text-white"></i>
+                    </span>
+                    <h3 class="mt-3 text-landing h4">Save Money</h3>
+                    <p>Save time and money by letting LeanAI handle your shopping list.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer goes here with contact information -->
+
 {% endblock %}
